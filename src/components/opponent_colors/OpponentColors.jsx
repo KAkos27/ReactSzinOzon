@@ -1,16 +1,13 @@
 import "./OpponentColors.css";
 
-const opponentColors = [0, 0, 0, 0];
-
-const OpponentsColors = ({ colors }) => {
+const OpponentsColors = ({ colorsToGuess }) => {
   return (
     <div className="opponent-colors">
-      {opponentColors.map((tipp, i) => (
-        <span key={i}>{tipp}</span>
+      {colorsToGuess.map((randColor, i) => (
+        <span className={randColor} key={i}></span>
       ))}
     </div>
   );
 };
 
 export default OpponentsColors;
-2;

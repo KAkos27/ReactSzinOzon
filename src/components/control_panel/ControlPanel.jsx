@@ -1,6 +1,4 @@
-const ControlPanel = ({ colors, onSelectColor }) => {
-  const handleNewGame = () => {};
-
+const ControlPanel = ({ colors, onSelectColor, onNewGame }) => {
   return (
     <div className="control-panel">
       {colors.map((color, i) => (
@@ -13,7 +11,7 @@ const ControlPanel = ({ colors, onSelectColor }) => {
           {color}
         </button>
       ))}
-      <button onClick={handleNewGame}>Új Játék!</button>
+      <button onClick={onNewGame}>Új Játék!</button>
     </div>
   );
 };
