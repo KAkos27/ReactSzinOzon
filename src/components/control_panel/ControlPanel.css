@@ -1,0 +1,32 @@
+.control-panel {
+  background-color: white;
+  border-radius: 15px;
+  -webkit-box-shadow: 10px 10px 33px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 33px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 33px 0px rgba(0, 0, 0, 0.75);
+  display: grid;
+  grid-column: 3;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row: 2;
+  height: 190px;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 5px;
+  width: 190px;
+}
+
+button {
+  border-radius: 10px;
+  height: 50px;
+  margin: 5px;
+  width: 50px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.new-game {
+  grid-column: 1/3;
+  width: 100px;
+}

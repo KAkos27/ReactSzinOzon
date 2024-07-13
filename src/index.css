@@ -4,10 +4,21 @@
   padding: 0;
 }
 
+body {
+  background-color: rgb(214, 203, 203);
+}
+
 span {
   border: 1px solid grey;
+  border-radius: 10px;
   height: 50px;
+  margin: 5px;
   width: 50px;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr 250px 1fr;
 }
 
 .red {
@@ -32,4 +43,8 @@ span {
 
 .purple {
   background-color: purple;
+}
+
+.hidden {
+  display: none;
 }

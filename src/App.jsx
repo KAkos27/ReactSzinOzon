@@ -34,12 +34,10 @@ const App = () => {
     setOpponentColors((prevColors) => {
       const updatedColors = [...prevColors];
       updatedColors.forEach((color, i) => {
-        const index = Math.floor(Math.random() * 6);
-        color = INITIAL_COLORS[index];
-        while (updatedColors.includes(color)) {
+        do {
           const index = Math.floor(Math.random() * 6);
           color = INITIAL_COLORS[index];
-        }
+        } while (updatedColors.includes(color));
         updatedColors[i] = color;
       });
       return updatedColors;

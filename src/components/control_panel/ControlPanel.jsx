@@ -1,3 +1,5 @@
+import "./ControlPanel.css";
+
 const ControlPanel = ({ colors, onSelectColor, onNewGame }) => {
   return (
     <div className="control-panel">
@@ -7,11 +9,11 @@ const ControlPanel = ({ colors, onSelectColor, onNewGame }) => {
           id={color}
           key={"b" + i}
           onClick={onSelectColor}
-        >
-          {color}
-        </button>
+        ></button>
       ))}
-      <button onClick={onNewGame}>Új Játék!</button>
+      <button className="new-game" onClick={onNewGame}>
+        Új Játék!
+      </button>
     </div>
   );
 };
