@@ -2,16 +2,22 @@ import { useState } from "react";
 import ControlPanel from "./components/control_panel/ControlPanel";
 import GameBoard from "./components/game_board/GameBoard";
 import OpponentsColors from "./components/opponent_colors/OpponentColors";
+import ResponseBar from "./components/response_bar/ResponseBar";
 
 const INITIAL_COLORS = ["red", "blue", "green", "yellow", "orange", "purple"];
+const BOARD_LENGTH = 36;
 
 const App = () => {
-  let colorId = "white";
-  const gameBoardArray = new Array(36).fill(colorId);
-  const opponentColorsArray = new Array(4).fill(colorId);
+  let colorId = "empty";
 
-  const [gameBoard, setGameBoard] = useState(gameBoardArray);
+  const opponentColorsArray = new Array(4).fill(colorId);
+  const gameBoardArray = new Array(BOARD_LENGTH).fill(colorId);
+  const responseArray = new Array(BOARD_LENGTH).fill("white");
+  const responsesToAdd = new Array(BOARD_LENGTH).fill("black");
+
   const [opponentColors, setOpponentColors] = useState(opponentColorsArray);
+  const [colorResponse, setColorResponse] = useState(responseArray);
+  const [gameBoard, setGameBoard] = useState(gameBoardArray);
   const [roundCount, setRoundCount] = useState(0);
 
   const handleColorPick = (event) => {
@@ -21,7 +27,21 @@ const App = () => {
       updatedBoard[roundCount] = colorId;
       return updatedBoard;
     });
-    setRoundCount(roundCount + 1);
+
+    for (let i = 0; i < opponentColors.length; i++) {
+      if (opponentColors[i] === gameBoard[roundCount]) {
+        responsesToAdd[roundCount - i] = "white";
+      }
+    }
+
+    const realRoundCount = roundCount + 1;
+    if (realRoundCount % 4 === 0) {
+      setColorResponse(() => {
+        const updatedResponses = [...responsesToAdd];
+        return updatedResponses;
+      });
+    }
+    setRoundCount(() => roundCount + 1);
   };
 
   const handleNewGame = () => {
@@ -48,6 +68,7 @@ const App = () => {
   return (
     <div className="app">
       <OpponentsColors colorsToGuess={opponentColors} />
+      <ResponseBar responses={colorResponse} />
       <GameBoard board={gameBoard} />
       <ControlPanel
         colors={INITIAL_COLORS}

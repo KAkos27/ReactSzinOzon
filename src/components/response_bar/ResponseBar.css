@@ -1,0 +1,21 @@
+.response-bar {
+  background-color: white;
+  border-radius: 15px;
+  display: grid;
+  grid-row: 2;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 20px 20px 0 auto;
+  padding: 5px;
+  width: 40px;
+}
+
+.response {
+  border: 1px solid black;
+  height: 8px;
+  margin: auto;
+  width: 8px;
+}
+
+.white {
+  background-color: white;
+}
