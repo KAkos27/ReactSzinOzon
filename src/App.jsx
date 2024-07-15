@@ -13,8 +13,9 @@ const App = () => {
   const opponentColorsArray = new Array(4).fill(colorId);
   const gameBoardArray = new Array(BOARD_LENGTH).fill(colorId);
   const responseArray = new Array(BOARD_LENGTH).fill("white");
-  const responsesToAdd = new Array(BOARD_LENGTH).fill("black");
+  const responsesToAddArray = new Array(BOARD_LENGTH).fill("white");
 
+  const [responsesToAdd, setResponsesToAdd] = useState(responsesToAddArray);
   const [opponentColors, setOpponentColors] = useState(opponentColorsArray);
   const [colorResponse, setColorResponse] = useState(responseArray);
   const [gameBoard, setGameBoard] = useState(gameBoardArray);
@@ -28,11 +29,16 @@ const App = () => {
       return updatedBoard;
     });
 
-    for (let i = 0; i < opponentColors.length; i++) {
-      if (opponentColors[i] === gameBoard[roundCount]) {
-        responsesToAdd[roundCount - i] = "white";
-      }
-    }
+    setTimeout(() => {
+      console.log(roundCount);
+      console.log(opponentColors[0]);
+      console.log(opponentColors[1]);
+      console.log(opponentColors[2]);
+      console.log(opponentColors[3]);
+      console.log("-----------");
+      console.log(gameBoard[roundCount]);
+      console.log(gameBoard);
+    }, 1000);
 
     const realRoundCount = roundCount + 1;
     if (realRoundCount % 4 === 0) {
