@@ -23,17 +23,31 @@ const App = () => {
   const [rowColors, setRowColors] = useState([]);
 
   useEffect(() => {
-    console.log(roundCount - 1);
     for (let i = 0; i < opponentColors.length; i++) {
       if (rowColors[i] === opponentColors[i]) {
         setResponsesToAdd((prevResponses) => {
           const updatedResponses = [...prevResponses];
           updatedResponses[roundCount - 1] = "black";
+          updatedResponses[roundCount] = "white";
+          return updatedResponses;
+        });
+      } else if (opponentColors.includes(rowColors[i])) {
+        setResponsesToAdd((prevResponses) => {
+          const updatedResponses = [...prevResponses];
+          updatedResponses[roundCount - 1] = "grey";
+          updatedResponses[roundCount] = "white";
           return updatedResponses;
         });
       }
     }
-  }, [gameBoard, roundCount, opponentColors, rowColors]);
+
+    if (roundCount % 4 === 0) {
+      setColorResponse(() => {
+        const updatedResponses = [...responsesToAdd];
+        return updatedResponses;
+      });
+    }
+  }, [gameBoard, roundCount, opponentColors, rowColors, responsesToAdd]);
 
   const handleColorPick = (event) => {
     if (roundCount % 4 === 0 && roundCount != 0) {
@@ -55,14 +69,6 @@ const App = () => {
       updatedBoard[roundCount] = colorId;
       return updatedBoard;
     });
-
-    const realRoundCount = roundCount + 1;
-    if (realRoundCount % 4 === 0) {
-      setColorResponse(() => {
-        const updatedResponses = [...responsesToAdd];
-        return updatedResponses;
-      });
-    }
 
     setRoundCount(() => roundCount + 1);
   };
