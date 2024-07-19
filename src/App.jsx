@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ControlPanel from "./components/control_panel/ControlPanel";
 import GameBoard from "./components/game_board/GameBoard";
 import OpponentsColors from "./components/opponent_colors/OpponentColors";
@@ -20,25 +20,41 @@ const App = () => {
   const [colorResponse, setColorResponse] = useState(responseArray);
   const [gameBoard, setGameBoard] = useState(gameBoardArray);
   const [roundCount, setRoundCount] = useState(0);
+  const [rowColors, setRowColors] = useState([]);
+
+  useEffect(() => {
+    console.log(roundCount - 1);
+    for (let i = 0; i < opponentColors.length; i++) {
+      if (rowColors[i] === opponentColors[i]) {
+        setResponsesToAdd((prevResponses) => {
+          const updatedResponses = [...prevResponses];
+          updatedResponses[roundCount - 1] = "black";
+          return updatedResponses;
+        });
+      }
+    }
+  }, [gameBoard, roundCount, opponentColors, rowColors]);
 
   const handleColorPick = (event) => {
+    if (roundCount % 4 === 0 && roundCount != 0) {
+      setRowColors((prevColors) => {
+        const updatedColors = [...prevColors];
+        updatedColors.length = 0;
+        return updatedColors;
+      });
+    }
+
     colorId = event.target.id;
+    setRowColors((prevColors) => {
+      const updatedColors = [...prevColors, colorId];
+      return updatedColors;
+    });
+
     setGameBoard((prevGameBoard) => {
       const updatedBoard = [...prevGameBoard];
       updatedBoard[roundCount] = colorId;
       return updatedBoard;
     });
-
-    setTimeout(() => {
-      console.log(roundCount);
-      console.log(opponentColors[0]);
-      console.log(opponentColors[1]);
-      console.log(opponentColors[2]);
-      console.log(opponentColors[3]);
-      console.log("-----------");
-      console.log(gameBoard[roundCount]);
-      console.log(gameBoard);
-    }, 1000);
 
     const realRoundCount = roundCount + 1;
     if (realRoundCount % 4 === 0) {
@@ -47,6 +63,7 @@ const App = () => {
         return updatedResponses;
       });
     }
+
     setRoundCount(() => roundCount + 1);
   };
 
@@ -68,6 +85,21 @@ const App = () => {
       });
       return updatedColors;
     });
+
+    setColorResponse((prevResponses) => {
+      const updatedResponses = [...prevResponses];
+      updatedResponses.fill("white");
+      return updatedResponses;
+    });
+
+    setResponsesToAdd((prevResponses) => {
+      const updatedResponses = [...prevResponses];
+      updatedResponses.fill("white");
+      return updatedResponses;
+    });
+
+    setRowColors([]);
+
     setRoundCount(0);
   };
 
