@@ -28,14 +28,12 @@ const App = () => {
         setResponsesToAdd((prevResponses) => {
           const updatedResponses = [...prevResponses];
           updatedResponses[roundCount - 1] = "black";
-          updatedResponses[roundCount] = "white";
           return updatedResponses;
         });
       } else if (opponentColors.includes(rowColors[i])) {
         setResponsesToAdd((prevResponses) => {
           const updatedResponses = [...prevResponses];
           updatedResponses[roundCount - 1] = "grey";
-          updatedResponses[roundCount] = "white";
           return updatedResponses;
         });
       }
