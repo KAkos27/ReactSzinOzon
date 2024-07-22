@@ -7,5 +7,6 @@
   display: flex;
   grid-column: 2;
   grid-row: 1;
+  min-height: 70px;
   padding: 5px;
 }

@@ -1,10 +1,12 @@
 import "./OpponentColors.css";
 
-const OpponentsColors = ({ colorsToGuess }) => {
+const OpponentsColors = ({ colorsToGuess, status }) => {
+  const visiblityClass = status ? "hidden" : "";
+
   return (
     <div className="opponent-colors">
       {colorsToGuess.map((randColor, i) => (
-        <span className={randColor} key={i}></span>
+        <span className={randColor + " " + visiblityClass} key={i}></span>
       ))}
     </div>
   );

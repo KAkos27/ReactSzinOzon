@@ -21,6 +21,7 @@ const App = () => {
   const [gameBoard, setGameBoard] = useState(gameBoardArray);
   const [roundCount, setRoundCount] = useState(0);
   const [rowColors, setRowColors] = useState([]);
+  const [status, setStatus] = useState(true);
 
   useEffect(() => {
     for (let i = 0; i < opponentColors.length; i++) {
@@ -72,6 +73,8 @@ const App = () => {
   };
 
   const handleNewGame = () => {
+    setStatus(false);
+
     setGameBoard((prevGameBoard) => {
       const updatedBoard = [...prevGameBoard];
       updatedBoard.fill(colorId);
@@ -109,13 +112,14 @@ const App = () => {
 
   return (
     <div className="app">
-      <OpponentsColors colorsToGuess={opponentColors} />
+      <OpponentsColors colorsToGuess={opponentColors} status={!status} />
       <ResponseBar responses={colorResponse} />
       <GameBoard board={gameBoard} />
       <ControlPanel
         colors={INITIAL_COLORS}
         onSelectColor={handleColorPick}
         onNewGame={handleNewGame}
+        status={status}
       />
     </div>
   );
